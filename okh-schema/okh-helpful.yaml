@@ -74,6 +74,12 @@ schematics: list(include('list-item'), required=False)
 bom: include('url-type', required=False)                              # recommended | absolute or relative path | Direct the maker to the Bill of Materials
 tool-list: include('url-type', required=False)                        # recommended | absolute or relative path | Direct the maker to a list of tools required to make the thing
 
+# # Note, these have been added to the original IOP schema definition.
+bom-atoms: list(str, required=False)
+tool-list-atoms: list(str, required=False)  
+product-atom: str(required)
+
+
 making-instructions: list(include('list-item'), required=False) 
 manufacturing-files: list(include('list-item'), required=False)
 risk-assessment: list(include('list-item'), required=False)
