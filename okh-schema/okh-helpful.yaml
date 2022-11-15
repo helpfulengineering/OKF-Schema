@@ -75,10 +75,16 @@ bom: include('url-type', required=False)                              # recommen
 tool-list: include('url-type', required=False)                        # recommended | absolute or relative path | Direct the maker to a list of tools required to make the thing
 
 # # Note, these have been added to the original IOP schema definition.
-bom-atoms: list(str, required=False)
-tool-list-atoms: list(str, required=False)  
-product-atom: str(required)
+bom-atoms: list(atom-type, required=False)
+tool-list-atoms: list(atom-type, required=False)
+product-atom: atom-type(required=True)
+bom-output-atoms: list(atom-type, required=False)
 
+atom-type:
+  identifier: str(required=True)
+  description: str(required=False)
+  link: url-type(required=False)
+# # END of added fields
 
 making-instructions: list(include('list-item'), required=False) 
 manufacturing-files: list(include('list-item'), required=False)
