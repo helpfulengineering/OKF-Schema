@@ -28,6 +28,10 @@ title: str(required=True)                    # required | text | A title to iden
 
 description: str(required=True)              # required | paragraph. Longer string??
 
+intended-output: str(required=False)
+
+#Unintended-out: str9required=False)  #should be adressed in the future to deal with waste streams
+
 intended-use: str(required=False)            # recommended | Paragraph
 
 keywords: list(str(),required=False)                                 # At least one keyword is recommended | text array 
