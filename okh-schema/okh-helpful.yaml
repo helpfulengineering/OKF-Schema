@@ -75,9 +75,6 @@ archive-download: include('url-type', required=False)                 # Absolute
 design-files: list(include('list-item'), required=False)
 schematics: list(include('list-item'), required=False)
 
-bom: include('url-type', required=False)                              # recommended | absolute or relative path | Direct the maker to the Bill of Materials
-tool-list: include('url-type', required=False)                        # recommended | absolute or relative path | Direct the maker to a list of tools required to make the thing
-
 # # Note, these have been added to the original IOP schema definition.
 bom-atoms: list(atom-type, required=False)
 tool-list-atoms: list(atom-type, required=False)
