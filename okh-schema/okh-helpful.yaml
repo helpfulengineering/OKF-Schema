@@ -1,6 +1,6 @@
 # Open know-how manifest 0.1
 ---
-# The content of this manifest file is licensed under a Creative Commons Attribution 4.0 International License. 
+# The content of this manifest file is licensed under a Creative Commons Attribution 4.0 International License.
 # Licenses for modification and distribution of the hardware, documentation, source-code, etc are stated separately.
 
 # Remove any fields that are not used. Comments (beginning with '#') may also be removed.
@@ -14,9 +14,9 @@ manifest-author:
   affiliation: str(required=False)
   email: regex('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
 
-manifest-language: str(required=False) # [language-code]-[region] 
+manifest-language: str(required=False) # [language-code]-[region]
 
-documentation-language: str(required=False) # [language-code]-[region] 
+documentation-language: str(required=False) # [language-code]-[region]
 
 manifest-is-translation: include('manifest-is-translation', required=False)
 
@@ -34,7 +34,7 @@ intended-output: str(required=False)
 
 intended-use: str(required=False)            # recommended | Paragraph
 
-keywords: list(str(),required=False)                                 # At least one keyword is recommended | text array 
+keywords: list(str(),required=False)                                 # At least one keyword is recommended | text array
 
 project-link: regex('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', required=False)
 
@@ -44,7 +44,7 @@ contact: include('contact-kit', required=False) # currently listed as required,
 
 contributors: list(include('nonessential-contact'), required=False)                             # recommended
 
-image: regex('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+((.gif)|(.png)|(.jpg)|(.jpeg))$', name="valid image url", ignore_case=True, required=False) 
+image: regex('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+((.gif)|(.png)|(.jpg)|(.jpeg))$', name="valid image url", ignore_case=True, required=False)
 version: str(required=False)                 # text
 
 development-stage: str(required=False)       # text
@@ -56,10 +56,10 @@ made-independently: bool(required=False)           # boolean - true or false
 standards-used: list(include('standards-used'), required=False)
 
 derivative-of:  include('relative-of', required=False)
-variant-of: include('relative-of', required=False) 
+variant-of: include('relative-of', required=False)
 sub: any(include('relative-of'), list(include('relative-of')), required=False) # should this be a list
 
-# # License 
+# # License
 
 # license: any(include('license-item'), list(include('license-item')))  # At least one license is required | The format should be an SPDX identifier. See https://spdx.org/licenses/hardware: [value] # recommended | The license under which the hardware is released
 license: license()  # At least one license is required | The format should be an SPDX identifier. See https://spdx.org/licenses/hardware: [value] # recommended | The license under which the hardware is released
@@ -90,21 +90,21 @@ atom-type:
   link: url-type(required=False)
 # # END of added fields
 
-making-instructions: list(include('list-item'), required=False) 
+making-instructions: list(include('list-item'), required=False)
 manufacturing-files: list(include('list-item'), required=False)
 risk-assessment: list(include('list-item'), required=False)
-tool-settings: list(include('list-item'), required=False) 
+tool-settings: list(include('list-item'), required=False)
 quality-instructions: list(include('list-item'), required=False)
 operating-instructions: list(include('list-item'), required=False)
 maintenance-instructions: list(include('list-item'), required=False)
 disposal-instructions: list(include('list-item'), required=False)
 software: list(include('list-item'), required=False)
 
-# # User defined Fields 
+# # User defined Fields
 # # Include any custom / extended fields here
 ---
 __root_validator__: any(key('documentation-home'), key('project-link'))
-manifest-is-translation: 
+manifest-is-translation:
   title: str(required=False) # text | Title of the original
   manifest: regex('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', name='valid url', required=False) # URL - Absolute path | OKH manifest location
   web: regex('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', name='valid url', required=False) # URL - Absolute path | web presence location
@@ -126,12 +126,12 @@ list-item:
   title: str(required=False)
 
 nonessential-contact:
-  name: str(required=False)                 
+  name: str(required=False)
   affiliation: str(required=False)
   email: regex('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', required=False)
 
 contact-kit:
-  name: str(required=False)                 
+  name: str(required=False)
   affiliation: str(required=False)
   email: regex('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', required=False)
   social: list(include('social-list-item'), required=False)
@@ -163,7 +163,7 @@ social-list-item:
 certification:                         # If certification has been granted confirming compliance with the standard
   certifier: str() # Individual or organisation granting the certification. Use "Self" for self-certification
   date-awarded: day() # Date certification was granted
-  link: str() # Link to evidence of certification (e.g. certificate). Use an an absolute path to an external resource or an absolute or relative path to evidence within the documentation.  
+  link: str() # Link to evidence of certification (e.g. certificate). Use an an absolute path to an external resource or an absolute or relative path to evidence within the documentation.
 
 spdx-intersection: any(include('spdx-type-single'), include('spdx-type-single-one'), include('spdx-type-single-one-one'), include('spdx-type-single-two'), include('spdx-type-optional'), include('spdx-type-bichoice'), include('spdx-type-trichoice'), include('spdx-type-multichoice'), include('spdx-type-three-leaves'), include('spdx-type-four-leaves'), include('spdx-type-five-leaves'), include('spdx-type-six-leaves'), include('spdx-type-mit'), include('spdx-type-sixteen-leaves'), include('spdx-type-gfdl'), include('spdx-type-cc'),required=False)
 spdx-ambition: regex('(CC(-|\s)(BY(-|\s)(1.0|2(.0|.5)|3.0(((-|\s)(AT|US))?)|4.0|NC(-|\s)(1.0|2(.0|.5)|3.0|4.0|ND(-|\s)(1.0|2(.0|.5)|3.0(((-|\s)IGO)?)|4.0)|SA(-|\s)(1.0|2(.0|.5)|3.0|4.0))|ND(-|\s)(1.0|2(.0|.5)|3.0|4.0)|SA(-|\s)(1.0|2(.0(((-|\s)UK)?)|.5)|3.0(((-|\s)AT)?)|4.0))|PDDC))|(GFDL(-|\s|\sv)1(.1|.2|.3)((((-|\s)(((no(-|\s))?)invariants))?)(-|\s)o(nly|r(-|\s)later)))|(BSD(-|\s)(1(-|\s)Clause|2(-|\s)Clause((Patent|Views)?)|3(-|\s)Clause(((-|\s)(Attribution|Clear|LBNL|Open(-|\s)MPI|No(-|\s)Nuclear(-|\s)(License(((-|\s)2014)|Warranty)?)))?)|4(-|\s)Clause(((-|\s)UC)?)|Protection|Source(-|\s)Code)|(OLDAP(-|\s|\sv)(1(.1|.2|.3|.4)|2((.0((.1)?)|.1|.2((.1|.2)?)|.3|.4|.5|.6|.7|.8)))))|(MIT((NFA|((-|\s)(0|advertising|CMU|enna|feh|open(-|\s)group)))?))|((CECILL(-|\s)(((1|2)(.0|.1))|B|C))|(LGPL(-|\s|\sv)(2(.0|.1)|3.0)(-|\s)o(nly|r(-|\s)later))|(OFL(-|\s|\sv)1(.0|.1)(((((-|\s)no)?)(-|\s)RFN)?)))|(AFL(-|\s|\sv)(1(.1|.2)|2(.0|.1)|3.0)|LPPL(-|\s|\sv)1.(0|1|2|3(a|c))|OSL(-|\s|\sv)(((1.|2.)(0|1))|3.0))|(APSL(-|\s|\sv)(1(.0|.1|.2)|2.0)|Artistic(-|\s)(1.0(((-|\s)(c18|Perl))?)|2.0)|(MPL(-|\s)((1(.0|.1))|(2.0(((-|\s)no(-|\s)copyleft(-|\s)exception)?))))|(OGL(-|\s)((UK(-|\s|\sv)(1|2|3).0)|Canada(-|\s|\sv)2.0)))|(CNRI(-|\s)(Jython|(Python(((-|\s)GPL(-|\s)Compatible)?)))|(Apache|(SGI(-|\s)B))(-|\s|\sv)(1(.0|.1)|2.0)|Spencer(-|\s|\sv)(86|9(4|9))|Unicode(-|\s)(TOU|DFS(-|\s)201(5|6))|ZPL(-|\s|\sv)(1.1|(2(.0|.1))))|(CERN(-|\s)OHL(-|\s|\sv)((1(.1|.2))|((P|S|W)(-|\s|\sv)2.0))|GPL(-|\s|\sv)(1|2|3).0(-|\s)o(nly|r(-|\s)later)|E(C|F|P)L(-|\s|\sv)(1|2).0)|(EUPL(-|\s|\sv)1(.0|.1|.2)|FSF(AP|UL((LR)?))|LiLiQ(-|\s)(P|(R((plus)?)))(-|\s|\sv)1.1|W3C((19980720|20150513)?))|((Adobe(-|\s)(2006|Glyph))|((((copyleft(-|\s)next(-|\s|\sv)0.3)|((BitTorrent|CDDL|((Y|N)PL))(-|\s|\sv)1)))(.0|.1))|(bzip2(-|\s|\sv)1.0(.5|.6))|CDLA(-|\s)(Permissive|Sharing)(-|\s|\sv)1.0|LAL(-|\s|\sv)1(.2|.3)|MS(-|\s)(P|R)L|((TU(-|\s)Berlin)|MulanPSL)(-|\s|\sv)(1.|2.)0|Parity(-|\s|\sv)(6|7).0.0|PolyForm(-|\s)(Noncommercial|Small(-|\s)Business)(-|\s|\sv)1.0.0|RPL(-|\s|\sv)1(.1|.5)|SSH(-|\s)(short|OpenSSH)|Zimbra(-|\s|\sv)1(.3|.4)|AGPL(-|\s|\sv)(1|3).0(-|\s)o(nly|r(-|\s)later))|((Sendmail(((-|\s|\sv)8.23)?))|(((SHL(-|\s|\sv)0.5)|(PHP(-|\s|\sv)3.0))((1)?))|(SISSL(((-|\s|\sv)1.2)?))|((ANTLR|NIST)(-|\s)PD(((-|\s)fallback)?))|(CAL(-|\s|\sv)1.0(((-|\s)Combined(-|\s)Work(-|\s)Exception)?))|(HPND(((-|\s)sell(-|\s)variant)?))|(Intel(((-|\s)ACPI)?))|(libpng(((-|\s|\sv)2.0)?))|(LPL(-|\s|\sv)1.0((2)?))|(NTP(((-|\s|\sv)0)?)))|(0BSD|AAL|Abstyles|ADSL|Afmparse|Aladdin|AM(DPLPA|L|PAS)|APAFML|Ba(rr|hyph)|(Beer|Gift)ware|blessing|Borceux|Caldera|ClArtistic|Cr(ossword|ystalStacker)|Cube|curl|diffmark|DOC|Dotseqn|DSDP|dvipdfm|eGenix|Entessa|EPICS|EUDatagrid|Eurosym|Fair|FreeImage|FTL|GL(2PS|ide|ulxe|WTPL)|gnuplot|HaskellReport|ICU|IJG|Im(ageMagick|atix|lib2)|IPA|ISC|JPNIC|JSON|Latex2e|Leptonica|LGPLLR|libtiff|MakeIndex|MirOS|Motosota|mpich2|MTLL|Mu(ltics|p)|Naumen|NCSA|NetCDF|Newsletr|NLPL|No(kia|SL|web)|NRL|OGTSL|OML|OpenSSL|Plexus|PostgreSQL|ps(frag|utils)|Qhull|Rdisc|RSCPL|Ruby|Saxpath|SCEA|Sleepycat|SM(LNJ|PPL)|SNIA|SWL|TCL|TMate|TOSL|Unlicense|V(i|OSTRO)m|Wsuipa|WTFPL|X(11|erox|inetd|net|pp|Skat)|Zed|BlueOak(-|\s|\sv)1.0.0|CPOL(-|\s|\sv)1.02|CUA(-|\s)OPL(-|\s|\sv)1.0|D(-|\s)FSL(-|\s|\sv)1.0|gSOAP(-|\s|\sv)1.3b|Hippocratic(-|\s|\sv)2.1|IBM(-|\s)pibs|Info(-|\s)ZIP|Linux(-|\s)OpenIB|NASA(-|\s|\sv)1.3|NCGL(-|\s)UK(-|\s|\sv)1.0|Net(-|\s)SNMP|NPOSL(-|\s|\sv)3.0|O(-|\s)UDA(-|\s|\sv)1.0|OCCT(-|\s)PL|ODC(-|\s)By(-|\s|\sv)1.0|OSET(-|\s)PL(-|\s|\sv)2.1|RSA(-|\s)MD|SAX(-|\s)PD|SugarCRM(-|\s|\sv)1.1.3|TAPR(-|\s)OHL(-|\s|\sv)1.0|TCP(-|\s)wrappers)|(((A|C|I|NB|O|Q|S|U)PL|(B|RP|V)SL|CC0|CPAL|Frameworx|Interbase|libselinux|NLOD|ODbL|OGC|PDDL|UCL|Watcom)(-|\s|\sv)1.0)|(((BU|CATO)SL|Condor|ErlPL|RheCos|Torque|XFree86)(-|\s|\sv)1.1)|((etalab|JasPer|OCLC|PSF|Python|SimPL|Zend)(-|\s|\sv)2.0)', ignore_case=True, name='proper SPDX identifier')
@@ -192,7 +192,7 @@ spdx-type-four-leaves: regex('APSL(-|\s|\sv)(1(.0|.1|.2)|2.0)|Artistic(-|\s)(1.0
 spdx-type-five-leaves: regex('AFL(-|\s|\sv)(1(.1|.2)|2(.0|.1)|3.0)|LPPL(-|\s|\sv)1.(0|1|2|3(a|c))|OSL(-|\s|\sv)(((1.|2.)(0|1))|3.0)', ignore_case=True, name='valid SPDX identifier')
 
 spdx-type-six-leaves: regex('(CECILL(-|\s)(((1|2)(.0|.1))|B|C))|(LGPL(-|\s|\sv)(2(.0|.1)|3.0)(-|\s)o(nly|r(-|\s)later))|(OFL(-|\s|\sv)1(.0|.1)(((((-|\s)no)?)(-|\s)RFN)?))', ignore_case=True, name='valid SPDX identifier')
- 
+
 spdx-type-mit: regex('MIT((NFA|((-|\s)(0|advertising|CMU|enna|feh|open(-|\s)group)))?)', ignore_case=True, name='valid SPDX identifier')
 
 spdx-type-sixteen-leaves: regex('BSD(-|\s)(1(-|\s)Clause|2(-|\s)Clause((Patent|Views)?)|3(-|\s)Clause(((-|\s)(Attribution|Clear|LBNL|Open(-|\s)MPI|No(-|\s)Nuclear(-|\s)(License(((-|\s)2014)|Warranty)?)))?)|4(-|\s)Clause(((-|\s)UC)?)|Protection|Source(-|\s)Code)|(OLDAP(-|\s|\sv)(1(.1|.2|.3|.4)|2((.0((.1)?)|.1|.2((.1|.2)?)|.3|.4|.5|.6|.7|.8))))', ignore_case=True, name='valid SPDX identifier')
