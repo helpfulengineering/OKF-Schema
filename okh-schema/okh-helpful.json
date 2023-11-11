@@ -1,0 +1,389 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Open Know-How manifest schema for Helpful Engineering",
+    "type": "object",
+    "properties": {
+        "date-created": {
+            "type": "string",
+            "format": "date",
+            "description": "Indicates the date the manifest was originally created"
+        },
+        "date-updated": {
+            "type": "string",
+            "format": "date",
+            "description": "Indicates the date the manifest was last edited"
+        },
+        "manifest-author": {
+            "$ref": "#/definitions/Contact",
+            "description": "States the person who has created and is responsible for the content in the manifest"
+        },
+        "title": {
+            "type": "string",
+            "description": " A title to identify the thing"
+        },
+        "description": {
+            "type": "string",
+            "description": "Describes the thing"
+        },
+        "intended-use": {
+            "type": "string",
+            "description": " Informs the maker for what purpose the designer intends the thing to be used. In particular, make reference to the context and type of users"
+        },
+        "keywords": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Provides a small number of terms that can be used to help identify"
+        },
+        "project-link": {
+            "type": "string",
+            "format": "uri",
+            "description": "Where the thing or associated project has a web presence that is separate from the documentation (e.g. a marketing page), links to the web resource",
+            "$comment": "At least one of the project-link or documentation-home fields is required"
+        },
+        "health-safety-notice": {
+            "type": "string",
+            "description": " Highlight health and safety risks and/or necessary precautions that the maker should be aware of as part of the decision to make the thing"
+        },
+        "contact": {
+            "$ref": "#/definitions/Contact",
+            "description": "Provides a point of contact for people who wish to discuss the thing"
+        },
+        "contributors": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Contact"
+            },
+            "description": "Credits the contributors to the know-how"
+        },
+        "image": {
+            "type": "string",
+            "format": "uri",
+            "description": "Provides a graphical representation of the thing"
+        },
+        "version": {
+            "type": "string",
+            "description": "Defines the version of the thing that is represented by this manifest"
+        },
+        "development-stage": {
+            "type": "string",
+            "description": "Indicates the maturity of the design and documentation development"
+        },
+        "made": {
+            "type": "boolean",
+            "description": "Indicates whether the thing has been made and verifies that it is makeable"
+        },
+        "made-independently": {
+            "type": "boolean",
+            "description": "Indicates whether the thing has been made using the documentation by someone who was not a contributor to the design or documentation and, therefore, verifies that the documentation is sufficient to make the thing"
+        },
+        "standards-used": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "standard-title": {
+                        "type": "string",
+                        "description": "Title of the standard used in developing the design or documentation"
+                    },
+                    "publisher": {
+                        "type": "string",
+                        "description": "Publisher of the standard"
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "Reference indentifier of the standard"
+                    },
+                    "certification": {
+                        "type": "object",
+                        "properties": {
+                            "certifier": {
+                                "type": "string",
+                                "description": "Individual or organisation granting the certification. Use \"Self\" for self-certification"
+                            },
+                            "date-awarded": {
+                                "type": "string",
+                                "format": "date",
+                                "description": "Date certification was granted"
+                            },
+                            "link": {
+                                "type": "string",
+                                "format": "uri",
+                                "description": "Link to evidence of certification (e.g. certificate)"
+                            }
+                        },
+                        "required": [
+                            "certifier",
+                            "date-awarded",
+                            "link"
+                        ],
+                        "description": "If certification has been granted confirming compliance with the standard"
+                    }
+                },
+                "required": [
+                    "standard-title"
+                ]
+            }
+        },
+        "derivative-of": {
+            "$ref": "#/definitions/OkhReference",
+            "description": "Where the thing is a derivative of a different thing (e.g. the documentation has been forked), links to the original thing"
+        },
+        "variant-of": {
+            "$ref": "#/definitions/OkhReference",
+            "description": "Where the thing is a variant, links to the original"
+        },
+        "sub": {
+            "$ref": "#/definitions/OkhReference",
+            "description": "Where the design uses sub-components, sub-assemblies etc that are also available as open know-how, links to the documentation"
+        },
+        "license": {
+            "type": "object",
+            "properties": {
+                "documentation": {
+                    "type": "string"
+                },
+                "hardware": {
+                    "type": "string"
+                },
+                "software": {
+                    "type": "string"
+                }
+            },
+            "description": "States the licenses under which the thing is made available",
+            "$comment": "At least one license is required."
+        },
+        "licensor": {
+            "$ref": "#/definitions/Contact",
+            "description": "States who is licensing the thing."
+        },
+        "documentation-home": {
+            "type": "string",
+            "format": "uri",
+            "description": "Provides a URL entry point to the documentation",
+            "$comment": "At least one of the project-link or documentation-home fields is required"
+        },
+        "archive-download": {
+            "type": "string",
+            "format": "uri",
+            "description": "Links to a location from which the full documentation can be downloaded as an archive (e.g. zip file)"
+        },
+        "design-files": {
+            "$ref": "#/definitions/MultipleFilesReference",
+            "description": "Links to design files"
+        },
+        "schematics": {
+            "$ref": "#/definitions/MultipleFilesReference",
+            "description": "Links to schematics"
+        },
+        "bom": {
+            "$ref": "#/definitions/SingleFileReference",
+            "description": "Links to the bill of materials"
+        },
+        "tool-list": {
+            "$ref": "#/definitions/SingleFileReference",
+            "description": "Links to a list of tools required to make the thing"
+        },
+        "making-instructions": {
+            "$ref": "#/definitions/MultipleFilesReference",
+            "description": "Links to the making instructions, e.g. assembly instructions"
+        },
+        "manufacturing-files": {
+            "$ref": "#/definitions/SingleFileReference",
+            "description": "Links to the manufacturing files, such as 3D printing files"
+        },
+        "risk-assessment": {
+            "$ref": "#/definitions/MultipleFilesReference",
+            "description": "Links to the risk assessment"
+        },
+        "tool-settings": {
+            "$ref": "#/definitions/MultipleFilesReference",
+            "description": "Links to settings for tools and machines"
+        },
+        "operating-instructions": {
+            "$ref": "#/definitions/SingleFileReference",
+            "description": "Links to instructions for operating the thing"
+        },
+        "maintenance-instructions": {
+            "$ref": "#/definitions/SingleFileReference",
+            "description": "Links to instructions for operating the thing"
+        },
+        "disposal-instructions": {
+            "$ref": "#/definitions/SingleFileReference",
+            "description": "Links to instructions for disposing the thing at the end of its life"
+        },
+        "software": {
+            "$ref": "#/definitions/MultipleFilesReference",
+            "description": "Links to source code repository or software executables used by the thing"
+        },
+        "manifest-language": {
+            "$ref": "#/definitions/Language",
+            "description": "States the language in which the manifest has been produced"
+        },
+        "documentation_language": {
+            "$ref": "#/definitions/Language",
+            "description": "States the language in which the documentation has been produced"
+        },
+        "manifest-is-translation": {
+            "$ref": "#/definitions/OkhReference",
+            "description": "Where this manifest is a translation of another, links to the original"
+        },
+        "documentation-is-translation": {
+            "$ref": "#/definitions/OkhReference",
+            "description": "Where this manifest references documentation that is translated, links to the original"
+        },
+        "product-atom": {
+            "$ref": "#/definitions/ProductAtom",
+            "description": "describes the output of this OKH as an atom"
+        },
+        "bom-atoms": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Atom"
+            },
+            "description": "describes the bill of materials to make this OKH as a an array of atoms"
+        },
+        "tool-list-atoms": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Atom"
+            },
+            "description": "describes the tools needed to make this OKH as a an array of atoms"
+        },
+        "bom-output-atoms": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Atom"
+            },
+            "description": "describes additional outputs of this OKH besides the product-atom"
+        }
+    },
+    "required": [
+        "title",
+        "description",
+        "license"
+    ],
+    "definitions": {
+        "Atom": {
+            "type": "object",
+            "properties": {
+                "identifier": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string",
+                    "format": "uri"
+                }
+            },
+            "required": [
+                "description",
+                "identifier"
+            ],
+            "additionalProperties": false,
+            "title": "Atom"
+        },
+        "Contact": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "affiliation": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "social": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "platform": {
+                                "type": "string"
+                            },
+                            "user-handle": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "platform",
+                            "user-handle"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "$comment": "email address or at least one social media user handle is required"
+        },
+        "OkhReference": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "Title of the original"
+                },
+                "manifest": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "OKH manifest location"
+                },
+                "web": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "web presence location"
+                },
+                "lang": {
+                    "$ref": "#/definitions/Language",
+                    "description": "language of original"
+                }
+            },
+            "required": [
+                "title"
+            ]
+        },
+        "MultipleFilesReference": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/SingleFileReference"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SingleFileReference"
+                    }
+                }
+            ]
+        },
+        "SingleFileReference": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "path": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                },
+                "required": [
+                    "path"
+                ]
+            }
+        },
+        "Language": {
+            "type": "string",
+            "description": "ISO 639 language code. Use the Alpha-2 code where available. Optionally, the ISO 3166 country code may be included.",
+            "$comment": "[language-code]-[region]"
+        }
+    }
+}
