@@ -234,7 +234,7 @@
             "description": "Where this manifest references documentation that is translated, links to the original"
         },
         "product-atom": {
-            "$ref": "#/definitions/ProductAtom",
+            "$ref": "#/definitions/Atom",
             "description": "describes the output of this OKH as an atom"
         },
         "bom-atoms": {
