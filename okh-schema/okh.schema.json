@@ -261,8 +261,7 @@
     },
     "required": [
         "title",
-        "description",
-        "license"
+        "description"
     ],
     "definitions": {
         "Atom": {
@@ -363,22 +362,26 @@
             ]
         },
         "SingleFileReference": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    },
-                    "path": {
-                        "type": "string",
-                        "format": "uri"
-                    }
+            "oneOf": [
+                {
+                    "type": "string"
                 },
-                "required": [
-                    "path"
-                ]
-            }
+                {
+                    "type": "object",
+                    "properties": {
+                        "title": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "required": [
+                        "path"
+                    ]
+                }
+            ]
         },
         "Language": {
             "type": "string",
