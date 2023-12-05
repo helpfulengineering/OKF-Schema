@@ -63,8 +63,16 @@
             "description": "Provides a graphical representation of the thing"
         },
         "version": {
-            "type": "string",
-            "description": "Defines the version of the thing that is represented by this manifest"
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "number"
+                }
+            ],
+            "description": "Defines the version of the thing that is represented by this manifest",
+            "$comment": "Added number alternative due to real world microscope okh file"
         },
         "development-stage": {
             "type": "string",
