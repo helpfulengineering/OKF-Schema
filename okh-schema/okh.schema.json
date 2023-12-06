@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Open Know-How manifest schema for Helpful Engineering",
     "type": "object",
+    "$comment": "Manually converted from https://standards.internetofproduction.org/pub/okh/release/1 spec. Please see field comments for any departures from the spec",
     "properties": {
         "date-created": {
             "type": "string",
@@ -15,7 +16,8 @@
         },
         "manifest-author": {
             "$ref": "#/definitions/Contact",
-            "description": "States the person who has created and is responsible for the content in the manifest"
+            "description": "States the person who has created and is responsible for the content in the manifest",
+            "$comment": "The standardized Contact definition includes a social field that is not included for manifest author in the spec. Feels like a mistake to have slightly different definitions for contact style fields"
         },
         "title": {
             "type": "string",
@@ -40,7 +42,7 @@
             "type": "string",
             "format": "uri",
             "description": "Where the thing or associated project has a web presence that is separate from the documentation (e.g. a marketing page), links to the web resource",
-            "$comment": "At least one of the project-link or documentation-home fields is required"
+            "$comment": "Should this be a SingleFileReference like other links? Also, there's a requirement in the spec to specify either project link or documentation home which has not been captured in this schema"
         },
         "health-safety-notice": {
             "type": "string",
@@ -55,7 +57,8 @@
             "items": {
                 "$ref": "#/definitions/Contact"
             },
-            "description": "Credits the contributors to the know-how"
+            "description": "Credits the contributors to the know-how",
+            "$comment": "Like manifest, uses the common Contact definition which adds social field"
         },
         "image": {
             "type": "string",
@@ -63,8 +66,16 @@
             "description": "Provides a graphical representation of the thing"
         },
         "version": {
-            "type": "string",
-            "description": "Defines the version of the thing that is represented by this manifest"
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "number"
+                }
+            ],
+            "description": "Defines the version of the thing that is represented by this manifest",
+            "$comment": "Added number alternative due to real world microscope okh file"
         },
         "development-stage": {
             "type": "string",
@@ -96,29 +107,9 @@
                         "description": "Reference indentifier of the standard"
                     },
                     "certification": {
-                        "type": "object",
-                        "properties": {
-                            "certifier": {
-                                "type": "string",
-                                "description": "Individual or organisation granting the certification. Use \"Self\" for self-certification"
-                            },
-                            "date-awarded": {
-                                "type": "string",
-                                "format": "date",
-                                "description": "Date certification was granted"
-                            },
-                            "link": {
-                                "type": "string",
-                                "format": "uri",
-                                "description": "Link to evidence of certification (e.g. certificate)"
-                            }
-                        },
-                        "required": [
-                            "certifier",
-                            "date-awarded",
-                            "link"
-                        ],
-                        "description": "If certification has been granted confirming compliance with the standard"
+                        "$ref": "#/definitions/Certification",
+                        "description": "If certification has been granted confirming compliance with the standard",
+                        "$comment": "Unclear from spec if this field is intended to support multiple certifications. Assuming single since the parent field is an array"
                     }
                 },
                 "required": [
@@ -128,15 +119,18 @@
         },
         "derivative-of": {
             "$ref": "#/definitions/OkhReference",
-            "description": "Where the thing is a derivative of a different thing (e.g. the documentation has been forked), links to the original thing"
+            "description": "Where the thing is a derivative of a different thing (e.g. the documentation has been forked), links to the original thing",
+            "$comment": "standardized definition of OkhReference with manifest-is-translation definition that includes a language field"
         },
         "variant-of": {
             "$ref": "#/definitions/OkhReference",
-            "description": "Where the thing is a variant, links to the original"
+            "description": "Where the thing is a variant, links to the original",
+            "$comment": "standardized definition of OkhReference"
         },
         "sub": {
             "$ref": "#/definitions/OkhReference",
-            "description": "Where the design uses sub-components, sub-assemblies etc that are also available as open know-how, links to the documentation"
+            "description": "Where the design uses sub-components, sub-assemblies etc that are also available as open know-how, links to the documentation",
+            "$comment": "standardized definition of OkhReference"
         },
         "license": {
             "type": "object",
@@ -152,17 +146,18 @@
                 }
             },
             "description": "States the licenses under which the thing is made available",
-            "$comment": "At least one license is required."
+            "$comment": "At least one license is required, but this is not captured by the schema."
         },
         "licensor": {
             "$ref": "#/definitions/Contact",
-            "description": "States who is licensing the thing."
+            "description": "States who is licensing the thing.",
+            "$comment": "standardized definition of Contact"
         },
         "documentation-home": {
             "type": "string",
             "format": "uri",
             "description": "Provides a URL entry point to the documentation",
-            "$comment": "At least one of the project-link or documentation-home fields is required"
+            "$comment": "requirement to specify at least one of project-link or documentation-home fields is not captured in schema"
         },
         "archive-download": {
             "type": "string",
@@ -179,11 +174,13 @@
         },
         "bom": {
             "$ref": "#/definitions/SingleFileReference",
-            "description": "Links to the bill of materials"
+            "description": "Links to the bill of materials",
+            "$comment": "Spec defines this as a link, but the sample OKH's I've seen specify this directly as a string. Also, standardized link to share design-files definition"
         },
         "tool-list": {
             "$ref": "#/definitions/SingleFileReference",
-            "description": "Links to a list of tools required to make the thing"
+            "description": "Links to a list of tools required to make the thing",
+            "$comment": "Similar change to bom"
         },
         "making-instructions": {
             "$ref": "#/definitions/MultipleFilesReference",
@@ -201,16 +198,20 @@
             "$ref": "#/definitions/MultipleFilesReference",
             "description": "Links to settings for tools and machines"
         },
+        "quality-instructions": {
+            "$ref": "#/definitions/MultipleFilesReference",
+            "description": "Links to instructions for testing and/or quality management"
+        },
         "operating-instructions": {
-            "$ref": "#/definitions/SingleFileReference",
+            "$ref": "#/definitions/MultipleFilesReference",
             "description": "Links to instructions for operating the thing"
         },
         "maintenance-instructions": {
-            "$ref": "#/definitions/SingleFileReference",
+            "$ref": "#/definitions/MultipleFilesReference",
             "description": "Links to instructions for operating the thing"
         },
         "disposal-instructions": {
-            "$ref": "#/definitions/SingleFileReference",
+            "$ref": "#/definitions/MultipleFilesReference",
             "description": "Links to instructions for disposing the thing at the end of its life"
         },
         "software": {
@@ -285,6 +286,31 @@
             "additionalProperties": false,
             "title": "Atom"
         },
+        "Certification": {
+            "type": "object",
+            "properties": {
+                "certifier": {
+                    "type": "string",
+                    "description": "Individual or organisation granting the certification. Use \"Self\" for self-certification"
+                },
+                "date-awarded": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date certification was granted"
+                },
+                "link": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Link to evidence of certification (e.g. certificate)"
+                }
+            },
+            "required": [
+                "certifier",
+                "date-awarded",
+                "link"
+            ],
+            "description": "If certification has been granted confirming compliance with the standard"
+        },
         "Contact": {
             "type": "object",
             "properties": {
@@ -320,7 +346,7 @@
             "required": [
                 "name"
             ],
-            "$comment": "email address or at least one social media user handle is required"
+            "$comment": "Spec constraint that Contact specifies at least one email address or social media user handle is not implemented in this schema"
         },
         "OkhReference": {
             "type": "object",
@@ -359,7 +385,8 @@
                         "$ref": "#/definitions/SingleFileReference"
                     }
                 }
-            ]
+            ],
+            "$comment": "Added support for single item w/o array syntax for user productivity"
         },
         "SingleFileReference": {
             "oneOf": [
@@ -381,7 +408,8 @@
                         "path"
                     ]
                 }
-            ]
+            ],
+            "$comment": "Unclear from spec what this definition should be. Used path/title object def from other examples like making-instructions"
         },
         "Language": {
             "type": "string",
