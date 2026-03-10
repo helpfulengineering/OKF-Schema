@@ -972,7 +972,18 @@
       "additionalProperties": true,
       "title": "Metadata",
       "type": "object"
-    }
+    },"domain": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Domain"
+      }
   },
   "required": [
     "title",
