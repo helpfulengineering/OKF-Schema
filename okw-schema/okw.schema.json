@@ -173,6 +173,9 @@
       "title": "RecordData",
       "properties": {},
       "required": []
+    },
+    "domain": {
+      "type": "string"
     }
   },
   "required": [
